@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 gem 'dsfr-view-components'
+gem 'dsfr-assets'
 
+environment 'require "dsfr/assets"'
 environment 'require "dsfr/components"'
 
 gem_group :development, :test do
@@ -11,6 +13,7 @@ end
 gem_group :test do
   gem 'capybara'
   gem 'cucumber-rails', require: false
+  gem 'factory_bot_rails'
   gem 'faker', require: false
   gem 'guard'
   gem 'guard-cucumber'
@@ -22,6 +25,8 @@ gem_group :test do
   gem 'rubocop-rspec_rails'
   gem 'rspec'
 end
+
+run 'bundle install'
 
 generate 'rspec:install'
 generate 'cucumber:install'
@@ -239,6 +244,12 @@ file 'app/views/layouts/application.html.erb', <<~ERB
   </html>
 ERB
 
+if File.exist?('app/assets/config/manifest.js')
+  ['dsfr.min.css', 'dsfr.module.min.js', 'dsfr.nomodule.min.js'].each do |asset|
+    insert_into_file 'app/assets/config/manifest.js', "//= link #{asset}\n"
+  end
+end
+
 file 'config/locales/fr.yml', <<~YML
   fr:
     global:
@@ -251,6 +262,61 @@ environment 'config.i18n.default_locale = :fr'
 
 generate 'controller Home index'
 route "root to: 'home#index'"
+
+file 'app/views/home/index.html.erb', <<~ERB
+  <% content_for(:page_title) { "ACCUEIL" } %>
+
+  <div class="fr-grid-row">
+    <div class="fr-col-12 fr-col-md-7">
+      <h1>Guide d'utilisation</h1>
+
+      <p class="fr-text--lead">Ce template vous permet de commencer à développer immédiatement avec des outils et des processus déjà mis en place pour vous.</p>
+
+      <p>Librairies applicatives :</p>
+
+      <ul>
+        <li><a href="https://rubyonrails.org/">Rails 8</a></li>
+        <li><a href="https://www.postgresql.org/">PostgreSQL 15</a></li>
+      </ul>
+
+      <p class="spacer"></p> <!-- https://github.com/GouvernementFR/dsfr/issues/582 -->
+
+      <p>La librairie <a href="https://betagouv.github.io/dsfr-view-components/">dsfr_view_components</a> est aussi incluse pour faciliter l'utilisation du DSFR :
+      </p>
+
+      <p>
+        <%= dsfr_button(label: "Un bouton inutile") %>
+      </p>
+
+      <p class="spacer"></p> <!-- https://github.com/GouvernementFR/dsfr/issues/582 -->
+
+      <p>Librairies de test :</p>
+
+      <ul>
+        <li><a href="https://rspec.info/">RSpec</a></li>
+        <li><a href="https://github.com/thoughtbot/factory_bot/">FactoryBot</a></li>
+        <li><a href="https://github.com/faker-ruby/faker/">Faker</a></li>
+        <li><a href="https://cucumber.io/">Cucumber/Capybara</a></li>
+        <li><a href="https://github.com/guard/guard/">Guard</a></li>
+      </ul>
+
+      <p class="spacer"></p> <!-- https://github.com/GouvernementFR/dsfr/issues/582 -->
+
+      <p>Librairies d'outillage :</p>
+
+      <ul>
+        <li><a href="https://github.com/rubocop/rubocop">Rubocop</a></li>
+        <li><a href="https://github.com/rubocop/rubocop-rspec">Rubocop-RSpec</a></li>
+        <li><a href="https://github.com/rubocop/rubocop-rails">Rubocop-Rails</a></li>
+        <li><a href="https://mailcatcher.me/">Mailcatcher</a></li>
+      </ul>
+
+      <p class="spacer"></p> <!-- https://github.com/GouvernementFR/dsfr/issues/582 -->
+
+      <p>Rendez-vous sur la <a href="https://github.com/betagouv/rails-template">page d'accueil du projet</a> pour plus d'informations.</a>
+    </div>
+  </div>
+ERB
 
 after_bundle do
   git :init
