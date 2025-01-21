@@ -39,6 +39,6 @@ jobs:
     - name: Setup a fake git name # Git is upset otherwise
       run: git config --global user.name "the GitHub Runner"
     - name: Start a test app
-      run: rails new -T --minimal -m "./template.rb" -f foobar
+      run: rails new -T -m "./template.rb" -f foobar
     - name: Test the page
       run: cd foobar && bundle exec cucumber --publish-quiet
