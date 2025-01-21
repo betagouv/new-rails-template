@@ -222,8 +222,8 @@ file 'app/views/layouts/application.html.erb', <<~ERB
       <%= csrf_meta_tags %>
       <%= csp_meta_tag %>
 
-      <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
       <%= stylesheet_link_tag "dsfr.min", "application-turbo-track": "reload" %>
+      <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 
       <%= javascript_include_tag "dsfr.module.min.js", type: 'module' %>
       <%= javascript_include_tag "dsfr.nomodule.min.js", nomodule: true %>
