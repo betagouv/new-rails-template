@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+USE_SPROCKETS = File.exist?('app/assets/config/manifest.js')
+
 gem 'dsfr-view-components'
 gem 'dsfr-assets'
 
@@ -245,10 +247,14 @@ file 'app/views/layouts/application.html.erb', <<~ERB
   </html>
 ERB
 
-if File.exist?('app/assets/config/manifest.js')
+if USE_SPROCKETS
+  # link the assets
   ['dsfr.min.css', 'dsfr.module.min.js', 'dsfr.nomodule.min.js'].each do |asset|
     insert_into_file 'app/assets/config/manifest.js', "//= link #{asset}\n"
   end
+
+  # remove the import map stuff
+  gsub_file('app/views/layouts/application.html.erb', /.*importmap.*/, '')
 end
 
 file 'config/locales/fr.yml', <<~YML
