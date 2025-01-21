@@ -1,4 +1,4 @@
-# rails-beta-template
+#  new-rails-template
 
 ![example workflow](https://github.com/freesteph/new-rails-template/actions/workflows/ruby.yml/badge.svg)
 
