@@ -39,11 +39,6 @@ jobs:
     - name: Setup a fake git name # Git is upset otherwise
       run: git config --global user.name "the GitHub Runner"
     - name: Start a test app
-      run: rails new -T -m "./template.rb" -f foobar
-    - name: Launch the test app
-      run: cd foobar && ./bin/rails server --daemon
-    - name: Test the root page
-      uses: jtalk/url-health-check-action@v4
-      with:
-        max-attempts: 3
-        url: http://localhost:3000/
+      run: rails new -T --minimal -m "./template.rb" -f foobar
+    - name: Test the page
+      run: cd foobar && bundle exec cucumber --publish-quiet

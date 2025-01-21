@@ -13,6 +13,7 @@ end
 gem_group :test do
   gem 'capybara'
   gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'faker', require: false
   gem 'guard'
@@ -317,6 +318,31 @@ file 'app/views/home/index.html.erb', <<~ERB
     </div>
   </div>
 ERB
+
+file 'features/step_definitions/web_steps.rb', <<~RB
+  # frozen_string_literal: true
+
+  Quand("je me rends sur la page d'accueil") do
+    visit "/"
+  end
+
+  Alors("la page contient {string}") do |content|
+    expect(page).to have_content(content)
+  end
+RB
+
+file 'features/page_d_accueil.feature', <<~RB
+  # language: fr
+
+  # Note : les IDEs et leurs plugins Cucumber sont censés pouvoir gérer
+  # l'internationalisation et donc les mots-clés en français aussi.
+
+  Fonctionnalité: La page d'accueil me salue
+    Scénario:
+      Quand je me rends sur la page d'accueil
+      Alors la page contient "Direction Interministérielle du Numérique"
+
+RB
 
 after_bundle do
   git :init
