@@ -215,7 +215,7 @@ ERB
 
 file 'app/views/layouts/application.html.erb', <<~ERB
   <!DOCTYPE html>
-  <html data-fr-scheme="system">
+  <html data-fr-scheme="system" lang="<%= I18n.locale %>">
     <head>
       <title><%= yield(:page_title) if content_for?(:page_title) %> - <%= t("global.service_name") %></title>
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
