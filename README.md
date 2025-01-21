@@ -2,7 +2,7 @@
 
 ![example workflow](https://github.com/freesteph/new-rails-template/actions/workflows/ruby.yml/badge.svg)
 
-![Capture d’écran 2025-01-21 à 01 32 00](https://github.com/user-attachments/assets/0c5f50ba-c970-465e-a402-3f88a4b17f2a)
+![Capture d’écran 2025-01-21 à 01 34 42](https://github.com/user-attachments/assets/fd39fe1e-706b-4c09-b7cb-72e0266dc5eb)
 
 
 Un template Rails opiniâtre pour démarrer une app avec le
