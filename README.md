@@ -1,5 +1,7 @@
 #  new-rails-template
 
+Rails x Beta
+
 ![example workflow](https://github.com/freesteph/new-rails-template/actions/workflows/ruby.yml/badge.svg)
 
 ![Capture d’écran 2025-01-21 à 01 34 42](https://github.com/user-attachments/assets/fd39fe1e-706b-4c09-b7cb-72e0266dc5eb)
