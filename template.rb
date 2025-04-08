@@ -93,7 +93,7 @@ file 'Makefile', <<~MAKEFILE
   	$(DOCKER-RUN) web $(BUNDLE-EXEC) guard
 
   debug:
-  	$(DOCKER-RUN) web $(BUNDLE-EXEC) rdbg -A web 12345
+  	$(DOCKER-RUN) web $(BUNDLE-EXEC) rdbg -nA web 12345
 MAKEFILE
 
 file 'app/views/shared/_flash.html.erb', <<~ERB
