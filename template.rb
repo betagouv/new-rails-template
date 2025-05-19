@@ -29,13 +29,17 @@ gem_group :test do
   gem 'rspec'
 end
 
+insert_into_file 'Gemfile', "\n\nruby file: \".ruby-version\"", after: 'source "https://rubygems.org"'
+
 run 'bundle install'
 
 generate 'rspec:install'
 generate 'cucumber:install'
 
+file '.ruby-version', RUBY_VERSION
+
 file 'Dockerfile.dev', <<~DOCKER
-  FROM ruby:3.4.1-slim
+  FROM ruby:#{RUBY_VERSION}-slim
 
   EXPOSE 3000
 

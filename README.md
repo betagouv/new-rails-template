@@ -38,3 +38,6 @@ rails new -T -m "template.rb" name_of_the_app
 Le `-T` désactive les tests qui sont installés par le template avec
 RSpec. Le reste des options Rails (`rails new --help`) sont à votre
 guise.
+
+NOTE : la version de Ruby que vous utilisez pour lancer la commande
+est aussi utilisée pour définir celle du projet.
