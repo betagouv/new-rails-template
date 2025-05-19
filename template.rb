@@ -266,10 +266,16 @@ end
 file 'config/locales/fr.yml', <<~YML
   fr:
     global:
-      sponsor: "Direction\nInterministérielle\ndu Numérique"
+      sponsor: "Direction\\nInterministérielle\\ndu Numérique"
       service_name: "#{app_name}"
       service_description: "Description de votre service"
 YML
+
+append_to_file 'app/assets/stylesheets/application.css', <<~CSS
+  .fr-header__logo {
+    white-space: pre-line;
+  }
+CSS
 
 environment 'config.i18n.default_locale = :fr'
 
