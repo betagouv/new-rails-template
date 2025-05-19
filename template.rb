@@ -358,7 +358,7 @@ after_bundle do
   git :init
   git add: '.'
   git commit: [
-    '-m "[rails-beta-template] initial commit" ',
+    "-m \"[#{app_name}] initial commit\" ",
     "-m 'birth tracker: https://github.com/betagouv/new-rails-template/issues/2'"
   ].join
 end
