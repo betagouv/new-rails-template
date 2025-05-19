@@ -25,7 +25,7 @@ version particulière : à quelques incertitudes près les nouvelles
 versions de Rails ou des gems incluses sont immédiatement utilisables,
 compatibles, voir les deux !
 
-Le template [est testé sur Ubuntu/macOS, Ruby 3.2+ et Rails 7/8](https://github.com/freesteph/new-rails-template/actions/workflows/ruby.yml).
+Le template [est testé sur Ubuntu/macOS, Ruby 3.3+ et Rails 7/8](https://github.com/freesteph/new-rails-template/actions/workflows/ruby.yml).
 
 ## Utilisation
 
