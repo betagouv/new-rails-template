@@ -48,7 +48,7 @@ file 'Dockerfile.dev', <<~DOCKER
   # do the bundle install in another directory with the strict essential
   # (Gemfile and Gemfile.lock) to allow further steps to be cached
   WORKDIR /bundle
-  COPY Gemfile Gemfile.lock ./
+  COPY .ruby-version Gemfile Gemfile.lock ./
   RUN bundle install
 
   # Move to the main folder
