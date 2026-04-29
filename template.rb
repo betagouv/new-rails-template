@@ -36,6 +36,8 @@ run 'bundle install'
 generate 'rspec:install'
 generate 'cucumber:install'
 
+file '.ruby-version', RUBY_VERSION.to_s
+
 file 'Dockerfile.dev', <<~DOCKER
   FROM ruby:#{RUBY_VERSION}-slim
 
