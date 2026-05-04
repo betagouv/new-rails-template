@@ -41,3 +41,12 @@ guise.
 
 NOTE : la version de Ruby que vous utilisez pour lancer la commande
 est aussi utilisée pour définir celle du projet.
+
+## Développement
+
+Un environnement Docker permet de tester l'image localement, qui
+démarrera sur `http://localhost:3000` :
+
+```sh
+docker compose up
+```
