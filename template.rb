@@ -234,8 +234,6 @@ file 'app/views/layouts/application.html.erb', <<~ERB
 
       <%= javascript_include_tag "dsfr.module.min.js", type: 'module' %>
       <%= javascript_include_tag "dsfr.nomodule.min.js", nomodule: true %>
-
-      <%= javascript_importmap_tags %>
     </head>
 
     <body>
