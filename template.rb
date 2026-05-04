@@ -334,7 +334,7 @@ file 'app/views/home/index.html.erb', <<~ERB
 
       <p class="spacer"></p> <!-- https://github.com/GouvernementFR/dsfr/issues/582 -->
 
-      <p>Rendez-vous sur la <a href="https://github.com/betagouv/rails-template">page d'accueil du projet</a> pour plus d'informations.</a>
+      <p>Rendez-vous sur la <a href="https://github.com/betagouv/new-rails-template">page d'accueil du projet</a> pour plus d'informations.</a>
     </div>
   </div>
 ERB
