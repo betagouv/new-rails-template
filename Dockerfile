@@ -11,7 +11,7 @@ COPY template.rb ./
 RUN git config --global user.email "runner@github.com"
 RUN git config --global user.name "the Docker"
 
-RUN rails new --skip-kamal -T -f -m ./template.rb foobar
+RUN rails new foobar --skip-kamal -T -f -m ./template.rb
 
 WORKDIR /app/foobar
 
