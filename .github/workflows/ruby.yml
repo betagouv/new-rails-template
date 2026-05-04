@@ -22,8 +22,8 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu, macos]
-        ruby-version: ['3.3', '3.4']
-        rails-version: ['7.2', '8']
+        ruby-version: ['3.4', '4.0']
+        rails-version: ['7.1', '8']
 
     steps:
     - uses: actions/checkout@v5
@@ -39,6 +39,6 @@ jobs:
     - name: Setup a fake git name # Git is upset otherwise
       run: git config --global user.name "the GitHub Runner"
     - name: Start a test app
-      run: rails new -T -m "./template.rb" -f foobar
+      run: rails new foobar --skip-kamal -T -f -m ./template.rb
     - name: Test the page
       run: cd foobar && bundle exec cucumber --publish-quiet

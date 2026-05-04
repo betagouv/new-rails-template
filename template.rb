@@ -2,6 +2,7 @@
 
 USE_SPROCKETS = File.exist?('app/assets/config/manifest.js')
 
+gem 'breadcrumbs_on_rails'
 gem 'dsfr-view-components'
 gem 'dsfr-assets'
 
@@ -35,6 +36,8 @@ run 'bundle install'
 
 generate 'rspec:install'
 generate 'cucumber:install'
+
+file '.ruby-version', RUBY_VERSION.to_s
 
 file 'Dockerfile.dev', <<~DOCKER
   FROM ruby:#{RUBY_VERSION}-slim
@@ -139,7 +142,7 @@ file 'app/views/shared/_footer.html.erb', <<~ERB
               <a class="fr-footer__content-link" target="_blank" href="https://gouvernement.fr">gouvernement.fr</a>
             </li>
             <li class="fr-footer__content-item">
-              <a class="fr-footer__content-link" target="_blank" href="https://service-public.fr">service-public.fr</a>
+              <a class="fr-footer__content-link" target="_blank" href="https://service-public.gouv.fr">service-public.fr</a>
             </li>
             <li class="fr-footer__content-item">
               <a class="fr-footer__content-link" target="_blank" href="https://data.gouv.fr">data.gouv.fr</a>
@@ -239,12 +242,13 @@ file 'app/views/layouts/application.html.erb', <<~ERB
       <%= render 'shared/skiplinks' %>
       <%= render 'shared/header' %>
 
-      <div class="fr-container">
-        <main class="fr-py-2w" id="main">
+      <main class="fr-py-2w" id="main">
+        <div class="fr-container">
+          <%= render_breadcrumbs(builder: DsfrHelper::BreadcrumbBuilder) %>
           <%= render 'shared/flash' %>
           <%= yield %>
-        </main>
-      </div>
+        </div>
+      </main>
 
       <%= render 'shared/footer' %>
     </body>
@@ -330,10 +334,34 @@ file 'app/views/home/index.html.erb', <<~ERB
 
       <p class="spacer"></p> <!-- https://github.com/GouvernementFR/dsfr/issues/582 -->
 
-      <p>Rendez-vous sur la <a href="https://github.com/betagouv/rails-template">page d'accueil du projet</a> pour plus d'informations.</a>
+      <p>Rendez-vous sur la <a href="https://github.com/betagouv/new-rails-template">page d'accueil du projet</a> pour plus d'informations.</a>
     </div>
   </div>
 ERB
+
+file 'app/helpers/dsfr_helper.rb', <<~RB
+  # frozen_string_literal: true
+
+  module DsfrHelper
+    class BreadcrumbBuilder < BreadcrumbsOnRails::Breadcrumbs::Builder
+      def render
+        # rubocop:disable Rails/HelperInstanceVariable
+        @context.dsfr_breadcrumbs do |component|
+          return "" if @elements.one? or @elements.empty?
+
+          *links, last = @elements
+
+          links.map do |element|
+            component.with_breadcrumb(href: element.path, label: element.name)
+          end
+
+          component.with_breadcrumb(label: last.name) unless last.nil?
+        end
+        # rubocop:enable Rails/HelperInstanceVariable
+      end
+    end
+  end
+RB
 
 file 'features/step_definitions/web_steps.rb', <<~RB
   # frozen_string_literal: true
